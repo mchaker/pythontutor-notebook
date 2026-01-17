@@ -8,3 +8,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN pip install --no-cache-dir \
     jupyterlab-pytutor
+
+RUN mkdir -p /tmp/prepackaged
+COPY doctest_example.py /tmp/prepackaged/
+USER root
+RUN chown -R jovyan:users /tmp/prepackaged
+USER ${NB_UID}
